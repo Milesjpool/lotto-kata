@@ -4,6 +4,14 @@ env:
     - CLASSPATH="$CLASSPATH:$application/build/classes/java/main"
 language: java
 
+before_cache:
+    - rm -f  $HOME/$application/.gradle/caches/modules-2/modules-2.lock
+    - rm -fr $HOME/$application/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/$application/.gradle/caches/
+    - $HOME/$application/.gradle/wrapper/
+
 install:
   - ./build.sh
 

@@ -1,0 +1,11 @@
+env:
+  global:
+    - application="TicketPrizeCalculator"
+    - CLASSPATH="$CLASSPATH:$application/build/classes/java/main"
+language: java
+
+install:
+  - ./build.sh
+
+script:
+  - java $application

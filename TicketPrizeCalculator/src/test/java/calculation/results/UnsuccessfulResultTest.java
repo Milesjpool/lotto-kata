@@ -2,19 +2,15 @@ package calculation.results;
 
 import org.junit.Test;
 
-import java.io.PrintStream;
-
-import static org.mockito.Mockito.*;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertThat;
 
 public class UnsuccessfulResultTest {
 
     @Test
-    public void itPrintsResultMessage() {
-        UnsuccessfulResult unit = new UnsuccessfulResult();
-        PrintStream printStream = mock(PrintStream.class);
+    public void itHasAResultMessage() {
+        CalculationResult unit = new UnsuccessfulResult();
 
-        unit.print(printStream);
-
-        verify(printStream, times(1)).println("This ticket did not win a prize.");
+        assertThat(unit.getMessage(), equalTo("This ticket did not win a prize."));
     }
 }

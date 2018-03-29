@@ -1,6 +1,8 @@
+import calculation.results.CalculationResult;
 import calculation.results.UnsuccessfulResult;
+import io.ResultPrinter;
 import io.Printable;
-import metadata.ApplicationHeader;
+import io.metadata.ApplicationHeader;
 
 public class TicketPrizeCalculator {
 
@@ -9,7 +11,9 @@ public class TicketPrizeCalculator {
     public static void main(String[] args){
         APPLICATION_HEADER.print(System.out);
 
-        Printable result = new UnsuccessfulResult();
-        result.print(System.out);
+        CalculationResult result = new UnsuccessfulResult();
+
+        Printable resultPrinter = new ResultPrinter(result);
+        resultPrinter.print(System.out);
     }
 }

@@ -1,4 +1,4 @@
-package metadata;
+package io.metadata;
 
 import org.junit.Test;
 

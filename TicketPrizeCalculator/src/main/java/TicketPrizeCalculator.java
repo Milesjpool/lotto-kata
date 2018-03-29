@@ -1,5 +1,10 @@
+import metadata.ApplicationHeader;
+
 public class TicketPrizeCalculator {
+
+    private static final ApplicationHeader APPLICATION_HEADER = new ApplicationHeader();
+
     public static void main(String[] args){
-        System.out.println("Hello world!");
+        APPLICATION_HEADER.print(System.out);
     }
 }

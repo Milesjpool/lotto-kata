@@ -28,4 +28,15 @@ public class SmokeTest {
         TicketPrizeCalculator.main(null);
         assertThat(outputStream.toString(), containsString("Miles Pool - Calculating Lottery Winners v1.0.0"));
     }
+
+    @Test
+    public void itNotifiesWhenATicketDoesNotWin(){
+        String winningNumbers = "1,2,3";
+        String ticketNumbers = "4,5,6";
+        String[] args = new String[]{"LotteryName", winningNumbers, ticketNumbers};
+
+        TicketPrizeCalculator.main(args);
+
+        assertThat(outputStream.toString(), containsString("This ticket did not win a prize."));
+    }
 }

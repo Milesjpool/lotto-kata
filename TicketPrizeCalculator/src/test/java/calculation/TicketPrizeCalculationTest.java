@@ -3,6 +3,7 @@ package calculation;
 import calculation.lotteries.LotteryPrize;
 import calculation.lotteries.LotteryRegistry;
 import calculation.results.CalculationResults;
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import io.Printable;
 import org.junit.Test;
 
@@ -15,12 +16,14 @@ public class TicketPrizeCalculationTest {
 
     private final LotteryRegistry lotteryRegistry = mock(LotteryRegistry.class);
     private final LotteryPrize lotteryPrize = mock(LotteryPrize.class);
+    private final ArgumentParser argumentParser = mock(ArgumentParser.class);
+    private final String[] args = new String[0];
 
     @Test
-    public void itReturnsInvalidArgumentsResult() {
-        String[] args = null;
+    public void itReturnsInvalidArgumentsResult() throws InvalidArgumentException {
+        when(argumentParser.getLotteryName(args)).thenThrow(InvalidArgumentException.class);
 
-        TicketPrizeCalculation unit = new TicketPrizeCalculation(args, lotteryRegistry);
+        TicketPrizeCalculation unit = new TicketPrizeCalculation(args, lotteryRegistry, argumentParser);
 
         Printable expected = CalculationResults.invalidArguments;
 
@@ -28,12 +31,13 @@ public class TicketPrizeCalculationTest {
     }
 
     @Test
-    public void itReturnsLotteryRegistryResult() {
+    public void itReturnsLotteryRegistryResult() throws InvalidArgumentException {
         String lotteryName = "myLottery";
-        String[] args = new String[]{lotteryName, "1", "2"};
 
+        when(argumentParser.getLotteryName(args)).thenReturn(lotteryName);
         when(lotteryRegistry.getLotteryPrize(lotteryName)).thenReturn(lotteryPrize);
-        TicketPrizeCalculation unit = new TicketPrizeCalculation(args, lotteryRegistry);
+
+        TicketPrizeCalculation unit = new TicketPrizeCalculation(args, lotteryRegistry, argumentParser);
 
         assertThat(unit.execute(), equalTo(lotteryPrize));
     }

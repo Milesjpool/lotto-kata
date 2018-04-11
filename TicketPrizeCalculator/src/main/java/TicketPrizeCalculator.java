@@ -1,3 +1,4 @@
+import calculation.ArgumentParser;
 import calculation.TicketPrizeCalculation;
 import calculation.lotteries.LotteryRegistry;
 import io.Printable;
@@ -10,7 +11,7 @@ public class TicketPrizeCalculator {
     public static void main(String[] args){
         APPLICATION_HEADER.print(System.out);
 
-        Printable calculationResult = new TicketPrizeCalculation(args, new LotteryRegistry()).execute();
+        Printable calculationResult = new TicketPrizeCalculation(args, new LotteryRegistry(), new ArgumentParser()).execute();
 
         calculationResult.print(System.out);
     }

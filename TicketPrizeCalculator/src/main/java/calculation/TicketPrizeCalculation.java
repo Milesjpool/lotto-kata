@@ -7,19 +7,18 @@ import io.Printable;
 
 public class TicketPrizeCalculation {
     private final LotteryRegistry lotteryRegistry;
+    private final ArgumentParser argumentParser;
     private String[] args;
 
-    public TicketPrizeCalculation(String[] args, LotteryRegistry lotteryRegistry) {
+    public TicketPrizeCalculation(String[] args, LotteryRegistry lotteryRegistry, ArgumentParser argumentParser) {
         this.args = args;
         this.lotteryRegistry = lotteryRegistry;
+        this.argumentParser = argumentParser;
     }
 
     public Printable execute() {
         try {
-            if (args == null || args.length != 3)
-                throw new InvalidArgumentException(args);
-
-            String lotteryName = args[0];
+            String lotteryName = argumentParser.getLotteryName(args);
             return lotteryRegistry.getLotteryPrize(lotteryName);
         }
         catch (InvalidArgumentException e){

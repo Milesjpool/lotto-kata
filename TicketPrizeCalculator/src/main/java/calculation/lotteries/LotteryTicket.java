@@ -1,12 +1,17 @@
 package calculation.lotteries;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class LotteryTicket {
     private final String lotteryName;
+    private int[] winningNumbers;
+    private int[] ticketNumbers;
 
-    public LotteryTicket(String lotteryName) {
+    public LotteryTicket(String lotteryName, int[] winningNumbers, int[] ticketNumbers) {
         this.lotteryName = lotteryName;
+        this.winningNumbers = winningNumbers;
+        this.ticketNumbers = ticketNumbers;
     }
 
     public String getLotteryName() {
@@ -15,7 +20,7 @@ public class LotteryTicket {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(lotteryName);
+        return Objects.hash(lotteryName, winningNumbers, ticketNumbers);
     }
 
     @Override
@@ -25,6 +30,8 @@ public class LotteryTicket {
         if (!(obj instanceof LotteryTicket))
             return false;
         LotteryTicket o = (LotteryTicket) obj;
-        return o.lotteryName == this.lotteryName;
+        return o.lotteryName == this.lotteryName
+                && Arrays.equals(o.winningNumbers, this.winningNumbers)
+                && Arrays.equals(o.ticketNumbers, this.ticketNumbers);
     }
 }

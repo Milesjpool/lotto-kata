@@ -56,8 +56,8 @@ public class SmokeTest {
 
     @Test
     public void itNotifiesWhenATicketWinsSpringLotto(){
-        String winningNumbers = "“7,20,4,35,1,12";
-        String ticketNumbers = "“7,4,20,35,1,12";
+        String winningNumbers = "7,20,4,35,1,12";
+        String ticketNumbers = "7,4,20,35,1,12";
         String[] args = new String[]{"SpringLotto", winningNumbers, ticketNumbers};
 
         TicketPrizeCalculator.main(args);

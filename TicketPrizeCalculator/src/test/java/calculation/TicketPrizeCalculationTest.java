@@ -26,7 +26,7 @@ public class TicketPrizeCalculationTest {
     public void itReturnsInvalidArgumentsResult() throws InvalidArgumentException {
         when(argumentParser.parse(args)).thenThrow(InvalidArgumentException.class);
 
-        TicketPrizeCalculation unit = new TicketPrizeCalculation(lotteryRegistry, argumentParser);
+        TicketPrizeCalculation unit = new TicketPrizeCalculation(argumentParser, lotteryRegistry);
 
         Printable expected = CalculationResults.invalidArguments;
 
@@ -39,7 +39,7 @@ public class TicketPrizeCalculationTest {
         when(argumentParser.parse(args)).thenReturn(lotteryticket);
         when(lotteryRegistry.getLotteryPrize(lotteryticket)).thenReturn(lotteryResult);
 
-        TicketPrizeCalculation unit = new TicketPrizeCalculation(lotteryRegistry, argumentParser);
+        TicketPrizeCalculation unit = new TicketPrizeCalculation(argumentParser, lotteryRegistry);
 
         assertThat(unit.calculate(args), equalTo(lotteryResult));
     }

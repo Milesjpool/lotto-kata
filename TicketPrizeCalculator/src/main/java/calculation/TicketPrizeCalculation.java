@@ -8,12 +8,12 @@ import io.InvalidArgumentException;
 import io.Printable;
 
 public class TicketPrizeCalculation {
-    private final LotteryRegistry lotteryRegistry;
     private final ArgumentParser<LotteryTicket> ticketParser;
+    private final LotteryRegistry lotteryRegistry;
 
-    public TicketPrizeCalculation(LotteryRegistry lotteryRegistry, ArgumentParser<LotteryTicket> ticketParser) {
-        this.lotteryRegistry = lotteryRegistry;
+    public TicketPrizeCalculation(ArgumentParser<LotteryTicket> ticketParser, LotteryRegistry lotteryRegistry) {
         this.ticketParser = ticketParser;
+        this.lotteryRegistry = lotteryRegistry;
     }
 
     public Printable calculate(String[] args) {

@@ -1,10 +1,10 @@
 package calculation.results;
 
-import io.Printable;
+import calculation.lotteries.LotteryResult;
 
 import java.io.PrintStream;
 
-public class UnrecognisedTicket implements Printable {
+public class UnrecognisedTicket implements LotteryResult {
     @Override
     public void print(PrintStream printStream) {
         printStream.println("This is not a recognised ticket.");

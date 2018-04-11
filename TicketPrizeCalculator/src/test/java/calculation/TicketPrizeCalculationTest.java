@@ -1,6 +1,6 @@
 package calculation;
 
-import calculation.lotteries.LotteryPrize;
+import calculation.lotteries.LotteryResult;
 import calculation.lotteries.LotteryRegistry;
 import calculation.lotteries.LotteryTicket;
 import calculation.results.CalculationResults;
@@ -20,7 +20,7 @@ public class TicketPrizeCalculationTest {
 
     private final String[] args = new String[0];
     private final LotteryTicket lotteryticket = mock(LotteryTicket.class);
-    private final LotteryPrize lotteryPrize = mock(LotteryPrize.class);
+    private final LotteryResult lotteryResult = mock(LotteryResult.class);
 
     @Test
     public void itReturnsInvalidArgumentsResult() throws InvalidArgumentException {
@@ -37,10 +37,10 @@ public class TicketPrizeCalculationTest {
     public void itReturnsLotteryRegistryResult() throws InvalidArgumentException {
 
         when(argumentParser.parse(args)).thenReturn(lotteryticket);
-        when(lotteryRegistry.getLotteryPrize(lotteryticket)).thenReturn(lotteryPrize);
+        when(lotteryRegistry.getLotteryPrize(lotteryticket)).thenReturn(lotteryResult);
 
         TicketPrizeCalculation unit = new TicketPrizeCalculation(lotteryRegistry, argumentParser);
 
-        assertThat(unit.calculate(args), equalTo(lotteryPrize));
+        assertThat(unit.calculate(args), equalTo(lotteryResult));
     }
 }

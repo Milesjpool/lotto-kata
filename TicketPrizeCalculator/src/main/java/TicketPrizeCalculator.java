@@ -1,14 +1,21 @@
 import calculation.LotteryTicketParser;
 import calculation.TicketPrizeCalculation;
+import calculation.lotteries.LotteryNotFound;
 import calculation.lotteries.LotteryRegistry;
+import calculation.lotteries.springlotto.SpringLotto;
 import io.Printable;
 import io.metadata.ApplicationHeader;
 
 public class TicketPrizeCalculator {
 
     private static final Printable APPLICATION_HEADER = new ApplicationHeader();
-    private static final LotteryRegistry lotteryRegistry = new LotteryRegistry();
+    private static final LotteryRegistry lotteryRegistry;
     private static final LotteryTicketParser argumentParser = new LotteryTicketParser();
+
+    static {
+        lotteryRegistry = new LotteryRegistry(new LotteryNotFound());
+        lotteryRegistry.registerLottery("SpringLotto", new SpringLotto());
+    }
 
     public static void main(String[] args){
         APPLICATION_HEADER.print(System.out);

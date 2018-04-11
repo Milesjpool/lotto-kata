@@ -1,11 +1,11 @@
 package calculation.lotteries.springlotto;
 
-import io.Printable;
+import calculation.lotteries.LotteryResult;
 
 import java.io.PrintStream;
 import java.util.Objects;
 
-public class SpringLottoWin implements Printable {
+public class SpringLottoWin implements LotteryResult {
     private final int prizeClass;
 
     public SpringLottoWin(int prizeClass) {

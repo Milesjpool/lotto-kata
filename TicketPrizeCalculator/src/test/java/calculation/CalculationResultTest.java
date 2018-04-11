@@ -11,14 +11,20 @@ public class CalculationResultTest {
     private final PrintStream printStream = mock(PrintStream.class);
 
     @Test
-    public void itPrintsResultMessage() {
+    public void itPrintsDefinedResultMessage() {
         String resultMessage = "Some result message";
 
-        CalculationResult unit = new CalculationResult(resultMessage);
+        CalculationResult unit = new TestCalculationResult(resultMessage);
 
         unit.print(printStream);
 
         verify(printStream, times(1)).println(resultMessage);
+    }
+
+    private class TestCalculationResult extends CalculationResult {
+        TestCalculationResult(String resultMessage) {
+            super(resultMessage);
+        }
     }
 }
 

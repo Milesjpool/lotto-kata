@@ -4,7 +4,7 @@ import io.Printable;
 
 import java.io.PrintStream;
 
-public class CalculationResult implements Printable {
+public abstract class CalculationResult implements Printable {
     private final String result;
 
     public CalculationResult(String result) {

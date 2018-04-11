@@ -1,5 +1,6 @@
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -30,6 +31,12 @@ public class SmokeTest {
     }
 
     @Test
+    public void itOutputsInvalidArgumentWarning(){
+        TicketPrizeCalculator.main(null);
+        assertThat(outputStream.toString(), containsString("Arguments should be of the form: <lottery-name> <winning-numbers> <ticket-numbers>"));
+    }
+
+    @Test
     public void itNotifiesWhenATicketDoesNotWin(){
         String winningNumbers = "1,2,3";
         String ticketNumbers = "4,5,6";
@@ -37,6 +44,19 @@ public class SmokeTest {
 
         TicketPrizeCalculator.main(args);
 
-        assertThat(outputStream.toString(), containsString("This ticket did not win a prize."));
+        assertThat(outputStream.toString(), containsString("This is not a recognised ticket."));
+    }
+
+    @Test
+    @Ignore("Work in Progress")
+    public void itNotifiesWhenATicketWinsSpringLotto(){
+        String winningNumbers = "“7,20,4,35,1,12";
+        String ticketNumbers = "“7,4,20,35,1,12";
+        String[] args = new String[]{"SpringLotto", winningNumbers, ticketNumbers};
+
+        TicketPrizeCalculator.main(args);
+
+        assertThat(outputStream.toString(), containsString("“This ticket won a prize of class 3 and amount £300."));
+        assertThat(outputStream.toString(), containsString("Matched the numbers 7, 35, 1, 12 from pool 1."));
     }
 }

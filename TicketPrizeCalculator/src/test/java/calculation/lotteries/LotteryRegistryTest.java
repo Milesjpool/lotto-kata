@@ -18,7 +18,7 @@ public class LotteryRegistryTest {
 
         Printable expected = new SpringLottoWin(3);
 
-        assertThat(unit.getLotteryPrize(lotteryName), equalTo(expected));
+        assertThat(unit.getLotteryPrize(new LotteryTicket(lotteryName)), equalTo(expected));
     }
 
     @Test
@@ -29,7 +29,7 @@ public class LotteryRegistryTest {
 
         Printable expected = CalculationResults.unrecognisedTicket;
 
-        assertThat(unit.getLotteryPrize(lotteryName), equalTo(expected));
+        assertThat(unit.getLotteryPrize(new LotteryTicket(lotteryName)), equalTo(expected));
     }
 }
 

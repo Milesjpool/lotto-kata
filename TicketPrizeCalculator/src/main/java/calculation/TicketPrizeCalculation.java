@@ -1,25 +1,25 @@
 package calculation;
 
 import calculation.lotteries.LotteryRegistry;
+import calculation.lotteries.LotteryTicket;
 import calculation.results.CalculationResults;
 import com.sun.javaws.exceptions.InvalidArgumentException;
+import io.ArgumentParser;
 import io.Printable;
 
 public class TicketPrizeCalculation {
     private final LotteryRegistry lotteryRegistry;
-    private final ArgumentParser argumentParser;
-    private String[] args;
+    private final ArgumentParser<LotteryTicket> ticketParser;
 
-    public TicketPrizeCalculation(String[] args, LotteryRegistry lotteryRegistry, ArgumentParser argumentParser) {
-        this.args = args;
+    public TicketPrizeCalculation(LotteryRegistry lotteryRegistry, ArgumentParser<LotteryTicket> ticketParser) {
         this.lotteryRegistry = lotteryRegistry;
-        this.argumentParser = argumentParser;
+        this.ticketParser = ticketParser;
     }
 
-    public Printable execute() {
+    public Printable calculate(String[] args) {
         try {
-            String lotteryName = argumentParser.getLotteryName(args);
-            return lotteryRegistry.getLotteryPrize(lotteryName);
+            LotteryTicket lotteryTicket = ticketParser.parse(args);
+            return lotteryRegistry.getLotteryPrize(lotteryTicket);
         }
         catch (InvalidArgumentException e){
             return CalculationResults.invalidArguments;

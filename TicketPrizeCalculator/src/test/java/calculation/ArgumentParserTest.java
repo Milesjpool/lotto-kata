@@ -1,5 +1,6 @@
 package calculation;
 
+import calculation.lotteries.LotteryTicket;
 import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.junit.Test;
 
@@ -8,36 +9,37 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public class ArgumentParserTest {
 
-    private final ArgumentParser unit = new ArgumentParser();
+    private final LotteryTicketParser unit = new LotteryTicketParser();
 
     @Test(expected = InvalidArgumentException.class)
     public void itThrowsWhenNotEnoughArgs() throws InvalidArgumentException {
         String[] args = new String[]{"my-lottery"};
 
-        unit.getLotteryName(args);
+        unit.parse(args);
     }
 
     @Test(expected = InvalidArgumentException.class)
     public void itThrowsWhenTooManyArgs() throws InvalidArgumentException {
         String[] args = new String[]{"my-lottery", "1", "2", "3"};
 
-        unit.getLotteryName(args);
+        unit.parse(args);
     }
 
     @Test(expected = InvalidArgumentException.class)
     public void itThrowsWhenNullArgs() throws InvalidArgumentException {
         String[] args = null;
 
-        unit.getLotteryName(args);
+        unit.parse(args);
     }
 
     @Test
-    public void itReturnsFirstArgumentAsLotteryName() throws InvalidArgumentException {
-        String expected = "my-lottery";
-        String[] args = new String[]{expected, "1", "2"};
+    public void itReturnsLotteryTicket() throws InvalidArgumentException {
+        String lotteryName = "my-lottery";
+        LotteryTicket expected = new LotteryTicket(lotteryName);
+        String[] args = new String[]{lotteryName, "1", "2"};
 
-        String lotteryName = unit.getLotteryName(args);
+        LotteryTicket ticket = unit.parse(args);
 
-        assertThat(lotteryName, equalTo(expected));
+        assertThat(ticket, equalTo(expected));
     }
 }

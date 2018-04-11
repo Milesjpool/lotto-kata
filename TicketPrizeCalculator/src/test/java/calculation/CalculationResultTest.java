@@ -1,24 +1,20 @@
-package io;
+package calculation;
 
-import calculation.results.CalculationResult;
-import io.ResultPrinter;
 import org.junit.Test;
 
 import java.io.PrintStream;
 
 import static org.mockito.Mockito.*;
 
-public class ResultPrinterTest {
+public class CalculationResultTest {
 
     private final PrintStream printStream = mock(PrintStream.class);
-    private final CalculationResult result = mock(CalculationResult.class);
 
     @Test
     public void itPrintsResultMessage() {
         String resultMessage = "Some result message";
-        when(result.getMessage()).thenReturn(resultMessage);
 
-        ResultPrinter unit = new ResultPrinter(result);
+        CalculationResult unit = new CalculationResult(resultMessage);
 
         unit.print(printStream);
 

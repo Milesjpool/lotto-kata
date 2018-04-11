@@ -1,6 +1,8 @@
 package calculation;
 
 import calculation.lotteries.springlotto.SpringLottoWin;
+import calculation.results.CalculationResults;
+import io.Printable;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,7 +16,7 @@ public class TicketPrizeCalculationTest {
 
         TicketPrizeCalculation unit = new TicketPrizeCalculation(args);
 
-        CalculationResult expected = TicketPrizeCalculation.invalidArguments;
+        Printable expected = CalculationResults.invalidArguments;
 
         assertThat(unit.execute(), equalTo(expected));
     }
@@ -25,7 +27,7 @@ public class TicketPrizeCalculationTest {
 
         TicketPrizeCalculation unit = new TicketPrizeCalculation(args);
 
-        CalculationResult expected = TicketPrizeCalculation.unrecognisedTicket;
+        Printable expected = CalculationResults.unrecognisedTicket;
 
         assertThat(unit.execute(), equalTo(expected));
     }
@@ -38,7 +40,7 @@ public class TicketPrizeCalculationTest {
 
         TicketPrizeCalculation unit = new TicketPrizeCalculation(args);
 
-        CalculationResult expected = new SpringLottoWin(3);
+        Printable expected = new SpringLottoWin(3);
 
         assertThat(unit.execute(), equalTo(expected));
     }

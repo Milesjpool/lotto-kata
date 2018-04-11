@@ -1,5 +1,6 @@
-package calculation;
+package calculation.results;
 
+import io.Printable;
 import org.junit.Test;
 
 import java.io.PrintStream;
@@ -8,14 +9,14 @@ import static org.mockito.Mockito.*;
 
 public class UnrecognisedTicketTest {
 
-    private final PrintStream printStream = mock(PrintStream.class);
 
     @Test
     public void itPrintsAResultMessage() {
         String expectedMessage = "This is not a recognised ticket.";
 
-        CalculationResult unit = new UnrecognisedTicket();
+        Printable unit = new UnrecognisedTicket();
 
+        PrintStream printStream = mock(PrintStream.class);
         unit.print(printStream);
 
         verify(printStream, times(1)).println(expectedMessage);

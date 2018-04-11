@@ -1,7 +1,7 @@
 package calculation;
 
 import calculation.lotteries.LotteryTicket;
-import com.sun.javaws.exceptions.InvalidArgumentException;
+import io.InvalidArgumentException;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -4,7 +4,7 @@ import calculation.lotteries.LotteryPrize;
 import calculation.lotteries.LotteryRegistry;
 import calculation.lotteries.LotteryTicket;
 import calculation.results.CalculationResults;
-import com.sun.javaws.exceptions.InvalidArgumentException;
+import io.InvalidArgumentException;
 import io.Printable;
 import org.junit.Test;
 

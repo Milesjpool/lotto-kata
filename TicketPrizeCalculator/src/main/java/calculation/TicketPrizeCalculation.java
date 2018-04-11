@@ -3,8 +3,8 @@ package calculation;
 import calculation.lotteries.LotteryRegistry;
 import calculation.lotteries.LotteryTicket;
 import calculation.results.CalculationResults;
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import io.ArgumentParser;
+import io.InvalidArgumentException;
 import io.Printable;
 
 public class TicketPrizeCalculation {

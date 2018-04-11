@@ -1,6 +1,6 @@
 package calculation.results;
 
-import calculation.lotteries.LotteryResult;
+import calculation.lotteries.results.LotteryResult;
 
 import java.io.PrintStream;
 

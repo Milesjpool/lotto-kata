@@ -1,6 +1,6 @@
 package calculation.lotteries.springlotto;
 
-import calculation.lotteries.LotteryResult;
+import calculation.lotteries.results.LotteryResult;
 
 import java.io.PrintStream;
 import java.util.Objects;
@@ -8,7 +8,7 @@ import java.util.Objects;
 public class SpringLottoWin implements LotteryResult {
     private final int prizeClass;
 
-    public SpringLottoWin(int prizeClass) {
+    SpringLottoWin(int prizeClass) {
         this.prizeClass = prizeClass;
     }
 

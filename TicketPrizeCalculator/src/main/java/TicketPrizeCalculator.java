@@ -1,6 +1,6 @@
 import calculation.LotteryTicketParser;
 import calculation.TicketPrizeCalculation;
-import calculation.lotteries.LotteryNotFound;
+import calculation.lotteries.NullLottery;
 import calculation.lotteries.LotteryRegistry;
 import calculation.lotteries.springlotto.SpringLotto;
 import io.Printable;
@@ -13,7 +13,7 @@ public class TicketPrizeCalculator {
     private static final LotteryTicketParser argumentParser = new LotteryTicketParser();
 
     static {
-        lotteryRegistry = new LotteryRegistry(new LotteryNotFound());
+        lotteryRegistry = new LotteryRegistry(new NullLottery());
         lotteryRegistry.registerLottery("SpringLotto", new SpringLotto());
     }
 

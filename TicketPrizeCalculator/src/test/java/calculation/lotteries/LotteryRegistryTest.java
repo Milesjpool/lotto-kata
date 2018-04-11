@@ -1,5 +1,6 @@
 package calculation.lotteries;
 
+import calculation.lotteries.results.LotteryResult;
 import calculation.lotteries.springlotto.Lottery;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +14,7 @@ public class LotteryRegistryTest {
 
     private final String lotteryName = "My-Lotto";
     private final Lottery lottery = mock(Lottery.class);
-    private final Lottery defaultLottery = mock(LotteryNotFound.class);
+    private final Lottery defaultLottery = mock(NullLottery.class);
 
     private final LotteryTicket lotteryTicket = mock(LotteryTicket.class);
     private final LotteryRegistry unit = new LotteryRegistry(defaultLottery);

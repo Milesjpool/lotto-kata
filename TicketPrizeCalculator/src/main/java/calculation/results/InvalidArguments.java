@@ -1,10 +1,8 @@
 package calculation.results;
 
-import io.Printable;
-
 import java.io.PrintStream;
 
-public class InvalidArguments implements Printable {
+public class InvalidArguments implements CalculationResult {
     @Override
     public void print(PrintStream printStream) {
         printStream.println("Arguments should be of the form:");

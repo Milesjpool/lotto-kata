@@ -1,6 +1,6 @@
 package calculation;
 
-import calculation.lotteries.LotteryResult;
+import calculation.lotteries.results.LotteryResult;
 import calculation.lotteries.LotteryRegistry;
 import calculation.lotteries.LotteryTicket;
 import calculation.results.CalculationResults;

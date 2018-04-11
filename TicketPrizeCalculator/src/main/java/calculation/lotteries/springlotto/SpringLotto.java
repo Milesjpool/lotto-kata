@@ -1,6 +1,6 @@
 package calculation.lotteries.springlotto;
 
-import calculation.lotteries.LotteryResult;
+import calculation.lotteries.results.LotteryResult;
 import calculation.lotteries.LotteryTicket;
 
 public class SpringLotto implements Lottery {

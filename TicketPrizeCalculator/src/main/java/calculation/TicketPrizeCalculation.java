@@ -1,22 +1,31 @@
 package calculation;
 
-import calculation.lotteries.springlotto.SpringLottoWin;
+import calculation.lotteries.LotteryRegistry;
 import calculation.results.CalculationResults;
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import io.Printable;
 
 public class TicketPrizeCalculation {
+    private final LotteryRegistry lotteryRegistry;
     private String[] args;
 
-    public TicketPrizeCalculation(String[] args) {
+    public TicketPrizeCalculation(String[] args, LotteryRegistry lotteryRegistry) {
         this.args = args;
+        this.lotteryRegistry = lotteryRegistry;
     }
 
     public Printable execute() {
-        if (args == null)
+        try {
+            if (args == null || args.length != 3)
+                throw new InvalidArgumentException(args);
+
+            String lotteryName = args[0];
+            return lotteryRegistry.getLotteryPrize(lotteryName);
+        }
+        catch (InvalidArgumentException e){
             return CalculationResults.invalidArguments;
-        if (args[0].equals("SpringLotto"))
-            return new SpringLottoWin(3);
-        return CalculationResults.unrecognisedTicket;
+        }
     }
+
 }
 

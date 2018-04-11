@@ -30,8 +30,15 @@ public class SmokeTest {
     }
 
     @Test
-    public void itOutputsInvalidArgumentWarning(){
+    public void itOutputsInvalidArguments_WhenArgsAreNull(){
         TicketPrizeCalculator.main(null);
+        assertThat(outputStream.toString(), containsString("Arguments should be of the form:"));
+        assertThat(outputStream.toString(), containsString("<lottery-name> <winning-numbers> <ticket-numbers>"));
+    }
+
+    @Test
+    public void itOutputsInvalidArguments_WhenIncorrectNumberOfArgs(){
+        TicketPrizeCalculator.main(new String[]{"LotteryName"});
         assertThat(outputStream.toString(), containsString("Arguments should be of the form:"));
         assertThat(outputStream.toString(), containsString("<lottery-name> <winning-numbers> <ticket-numbers>"));
     }

@@ -1,20 +1,26 @@
 package calculation;
 
-import calculation.lotteries.springlotto.SpringLottoWin;
+import calculation.lotteries.LotteryPrize;
+import calculation.lotteries.LotteryRegistry;
 import calculation.results.CalculationResults;
 import io.Printable;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class TicketPrizeCalculationTest {
+
+    private final LotteryRegistry lotteryRegistry = mock(LotteryRegistry.class);
+    private final LotteryPrize lotteryPrize = mock(LotteryPrize.class);
 
     @Test
     public void itReturnsInvalidArgumentsResult() {
         String[] args = null;
 
-        TicketPrizeCalculation unit = new TicketPrizeCalculation(args);
+        TicketPrizeCalculation unit = new TicketPrizeCalculation(args, lotteryRegistry);
 
         Printable expected = CalculationResults.invalidArguments;
 
@@ -22,26 +28,13 @@ public class TicketPrizeCalculationTest {
     }
 
     @Test
-    public void itReturnsUnrecognisedTicketResult() {
-        String[] args = new String[]{"WeirdLottery"};
+    public void itReturnsLotteryRegistryResult() {
+        String lotteryName = "myLottery";
+        String[] args = new String[]{lotteryName, "1", "2"};
 
-        TicketPrizeCalculation unit = new TicketPrizeCalculation(args);
+        when(lotteryRegistry.getLotteryPrize(lotteryName)).thenReturn(lotteryPrize);
+        TicketPrizeCalculation unit = new TicketPrizeCalculation(args, lotteryRegistry);
 
-        Printable expected = CalculationResults.unrecognisedTicket;
-
-        assertThat(unit.execute(), equalTo(expected));
-    }
-
-    @Test
-    public void itReturnsAWinningResult() {
-        String winningNumbers = "“7,20,4,35,1,12";
-        String ticketNumbers = "“7,4,20,35,1,12";
-        String[] args = new String[]{"SpringLotto", winningNumbers, ticketNumbers};
-
-        TicketPrizeCalculation unit = new TicketPrizeCalculation(args);
-
-        Printable expected = new SpringLottoWin(3);
-
-        assertThat(unit.execute(), equalTo(expected));
+        assertThat(unit.execute(), equalTo(lotteryPrize));
     }
 }

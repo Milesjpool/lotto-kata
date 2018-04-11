@@ -1,6 +1,5 @@
 package calculation.lotteries;
 
-import calculation.lotteries.springlotto.Lottery;
 import io.Printable;
 
 import java.util.HashMap;

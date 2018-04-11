@@ -1,7 +1,6 @@
 package calculation.lotteries;
 
 import calculation.lotteries.results.LotteryResult;
-import calculation.lotteries.springlotto.Lottery;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -6,22 +6,22 @@ import java.io.PrintStream;
 import java.util.Objects;
 
 public class SpringLottoWin implements LotteryResult {
-    private final int prizeClass;
+    private final Prize prize;
 
-    SpringLottoWin(int prizeClass) {
-        this.prizeClass = prizeClass;
+    SpringLottoWin(Prize prize) {
+        this.prize = prize;
     }
 
 
     @Override
     public void print(PrintStream printStream) {
-        printStream.println("This ticket won a prize of class " + prizeClass + " and amount £300.");
+        printStream.println("This ticket won " + prize);
         printStream.println("Matched the numbers 7, 35, 1, 12 from pool 1.");
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(prizeClass);
+        return Objects.hash(prize);
     }
 
     @Override
@@ -31,6 +31,6 @@ public class SpringLottoWin implements LotteryResult {
         if (!(obj instanceof SpringLottoWin))
                 return false;
         SpringLottoWin o = (SpringLottoWin) obj;
-        return o.prizeClass == this.prizeClass;
+        return o.prize == this.prize;
     }
 }

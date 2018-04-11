@@ -1,7 +1,6 @@
-package calculation.lotteries.springlotto;
+package calculation.lotteries;
 
 import calculation.lotteries.results.LotteryResult;
-import calculation.lotteries.LotteryTicket;
 
 public interface Lottery {
     LotteryResult evaluateTicket(LotteryTicket ticket);

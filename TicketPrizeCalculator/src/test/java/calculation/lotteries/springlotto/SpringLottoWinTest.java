@@ -1,5 +1,6 @@
 package calculation.lotteries.springlotto;
 
+import calculation.lotteries.Prize;
 import io.Printable;
 import org.junit.Test;
 

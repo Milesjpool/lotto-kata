@@ -1,4 +1,4 @@
-package calculation.lotteries.springlotto;
+package calculation.lotteries;
 
 import java.util.Objects;
 
@@ -6,7 +6,7 @@ public class Prize {
     private final int prizeClass;
     private final String winnings;
 
-    Prize(int prizeClass, String winnings) {
+    public Prize(int prizeClass, String winnings) {
         this.prizeClass = prizeClass;
         this.winnings = winnings;
     }

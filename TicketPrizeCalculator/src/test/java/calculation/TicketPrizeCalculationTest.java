@@ -2,7 +2,7 @@ package calculation;
 
 import calculation.lotteries.results.LotteryResult;
 import calculation.lotteries.LotteryRegistry;
-import calculation.lotteries.LotteryTicket;
+import calculation.lotteries.tickets.LotteryTicket;
 import calculation.results.CalculationResults;
 import io.InvalidArgumentException;
 import io.Printable;

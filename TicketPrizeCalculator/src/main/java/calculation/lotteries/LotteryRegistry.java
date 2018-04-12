@@ -1,5 +1,6 @@
 package calculation.lotteries;
 
+import calculation.lotteries.tickets.LotteryTicket;
 import io.Printable;
 
 import java.util.HashMap;

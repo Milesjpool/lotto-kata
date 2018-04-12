@@ -1,6 +1,6 @@
 package calculation;
 
-import calculation.lotteries.LotteryTicket;
+import calculation.lotteries.tickets.LotteryTicket;
 import io.InvalidArgumentException;
 import org.junit.Test;
 

@@ -1,6 +1,7 @@
 package calculation.lotteries;
 
 import calculation.lotteries.results.LotteryResults;
+import calculation.lotteries.tickets.LotteryTicket;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;

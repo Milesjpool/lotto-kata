@@ -1,6 +1,7 @@
 package calculation.lotteries;
 
 import calculation.lotteries.results.LotteryResult;
+import calculation.lotteries.tickets.LotteryTicket;
 import org.junit.Before;
 import org.junit.Test;
 

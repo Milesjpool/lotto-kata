@@ -1,4 +1,4 @@
-package calculation.lotteries.springlotto;
+package calculation.lotteries;
 
 import org.junit.Test;
 

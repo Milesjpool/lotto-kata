@@ -1,4 +1,4 @@
-package calculation.lotteries;
+package calculation.lotteries.tickets;
 
 import java.util.Arrays;
 import java.util.Objects;

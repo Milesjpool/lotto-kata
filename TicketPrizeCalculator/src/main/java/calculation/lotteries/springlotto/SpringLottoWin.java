@@ -1,5 +1,6 @@
 package calculation.lotteries.springlotto;
 
+import calculation.lotteries.Prize;
 import calculation.lotteries.results.LotteryResult;
 
 import java.io.PrintStream;

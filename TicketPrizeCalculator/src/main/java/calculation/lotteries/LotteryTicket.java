@@ -18,6 +18,14 @@ public class LotteryTicket {
         return lotteryName;
     }
 
+    public int[] getWinningNumbers() {
+        return winningNumbers;
+    }
+
+    public int[] getTicketNumbers() {
+        return ticketNumbers;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(lotteryName, winningNumbers, ticketNumbers);

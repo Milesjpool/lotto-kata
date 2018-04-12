@@ -1,4 +1,4 @@
-package calculation.results;
+package calculation.lotteries.results;
 
 import io.Printable;
 import org.junit.Test;

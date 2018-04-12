@@ -3,6 +3,7 @@ import calculation.LotteryTicketParser;
 import calculation.TicketPrizeCalculation;
 import calculation.lotteries.NullLottery;
 import calculation.lotteries.LotteryRegistry;
+import calculation.lotteries.springlotto.SpringLottoPrizeResolution;
 import calculation.lotteries.tickets.validation.ChainedNumberSetValidation;
 import calculation.lotteries.springlotto.SpringLotto;
 import calculation.lotteries.tickets.validation.NoDuplicateNumbersValidation;
@@ -23,7 +24,7 @@ public class TicketPrizeCalculator {
                     new NumberSetLengthValidation(6),
                     new NumberRangeValidation(1, 36),
                     new NoDuplicateNumbersValidation()
-            ));
+            ), new SpringLottoPrizeResolution());
 
     static {
         lotteryRegistry = new LotteryRegistry(new NullLottery());

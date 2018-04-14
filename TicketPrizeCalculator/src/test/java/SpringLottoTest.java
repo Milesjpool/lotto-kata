@@ -23,7 +23,7 @@ public class SpringLottoTest {
     }
 
     @Test
-    public void itNotifies_whenATicketDoesNotWinSpringLotto(){
+    public void itNotifies_whenATicketDoesNotWin(){
         String winningNumbers = "6,20,4,30,2,10";
         String ticketNumbers = "7,4,20,35,1,12";
         String[] args = new String[]{"SpringLotto", winningNumbers, ticketNumbers};
@@ -34,7 +34,7 @@ public class SpringLottoTest {
     }
 
     @Test
-    public void itNotifies_whenATicketWinsSpringLotto(){
+    public void itNotifies_whenATicketWins(){
         String winningNumbers = "7,20,4,35,1,12";
         String ticketNumbers = "7,4,20,35,1,12";
         String[] args = new String[]{"SpringLotto", winningNumbers, ticketNumbers};
@@ -46,7 +46,7 @@ public class SpringLottoTest {
     }
 
     @Test
-    public void itNotifies_whenATicketWinsSpringLottoJackpot(){
+    public void itNotifies_whenATicketWinsJackpot(){
         String winningNumbers = "7,4,20,35,1,12";
         String ticketNumbers = "7,4,20,35,1,12";
         String[] args = new String[]{"SpringLotto", winningNumbers, ticketNumbers};
@@ -55,5 +55,16 @@ public class SpringLottoTest {
 
         assertThat(outputStream.toString(), containsString("This ticket won a prize of class 1 and amount £500,000."));
         assertThat(outputStream.toString(), containsString("Matched the numbers 7, 4, 20, 35, 1, 12 from pool 1."));
+    }
+
+    @Test
+    public void itNotifies_whenATicketIsInvalid(){
+        String winningNumbers = "7,4,20,35,1,100";
+        String ticketNumbers = "7,4,20,35,1,110";
+        String[] args = new String[]{"SpringLotto", winningNumbers, ticketNumbers};
+
+        TicketPrizeCalculator.main(args);
+
+        assertThat(outputStream.toString(), containsString("This ticket is malformed."));
     }
 }

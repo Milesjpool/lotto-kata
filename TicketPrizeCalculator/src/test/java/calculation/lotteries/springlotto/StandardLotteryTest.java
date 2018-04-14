@@ -13,14 +13,14 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SpringLottoTest {
+public class StandardLotteryTest {
 
     private int[] winningNums = new int[]{7,20,4,35,1,12};
     private int[] ticketNums = new int[]{7,4,20,35,1,12};
     private final LotteryTicket ticket = mock(LotteryTicket.class);
     private final NumberSetValidation numberSetValidation = mock(NumberSetValidation.class);
-    private final SpringLottoEntryResolution springLottoEntryResolution = mock(SpringLottoEntryResolution.class);
-    private final SpringLotto unit = new SpringLotto(numberSetValidation, springLottoEntryResolution);
+    private final SpringLottoTicketResolution springLottoTicketResolution = mock(SpringLottoTicketResolution.class);
+    private final StandardLottery unit = new StandardLottery(numberSetValidation, springLottoTicketResolution);
 
     @Before
     public void Setup() {
@@ -50,7 +50,7 @@ public class SpringLottoTest {
     public void itReturnsAResult_whenATicketIsValid(){
         when(numberSetValidation.isValid(any())).thenReturn(true);
         LotteryResult result = mock(LotteryResult.class);
-        when(springLottoEntryResolution.getResult(ticket)).thenReturn(result);
+        when(springLottoTicketResolution.getResult(ticket)).thenReturn(result);
 
         assertThat(unit.evaluateTicket(ticket), equalTo(result));
     }

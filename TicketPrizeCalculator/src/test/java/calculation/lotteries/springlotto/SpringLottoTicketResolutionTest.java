@@ -14,7 +14,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SpringLottoEntryResolutionTest {
+public class SpringLottoTicketResolutionTest {
 
     private final PrizeStructure prizeStructure = mock(PrizeStructure.class);
     private final LotteryTicket entry = mock(LotteryTicket.class);
@@ -26,7 +26,7 @@ public class SpringLottoEntryResolutionTest {
         when(entry.getTicketNumbers()).thenReturn(new int[]{2,3});
 
         when(prizeStructure.lookup(new SinglePoolTicketMatch())).thenReturn(Optional.empty());
-        SpringLottoEntryResolution unit = new SpringLottoEntryResolution(prizeStructure, new SpringLottoTicketMatcher());
+        SpringLottoTicketResolution unit = new SpringLottoTicketResolution(new SpringLottoTicketMatcher(), prizeStructure);
 
 
         assertThat(unit.getResult(entry), equalTo(LotteryResults.unsuccessfulTicket));
@@ -40,7 +40,7 @@ public class SpringLottoEntryResolutionTest {
         TicketMatch ticketMatch = new SinglePoolTicketMatch(3);
         when(prizeStructure.lookup(ticketMatch)).thenReturn(Optional.of(prize));
 
-        SpringLottoEntryResolution unit = new SpringLottoEntryResolution(prizeStructure, new SpringLottoTicketMatcher());
+        SpringLottoTicketResolution unit = new SpringLottoTicketResolution(new SpringLottoTicketMatcher(), prizeStructure);
 
         assertThat(unit.getResult(entry), equalTo(new SpringLottoWin(prize, ticketMatch)));
     }
@@ -53,7 +53,7 @@ public class SpringLottoEntryResolutionTest {
         TicketMatch ticketMatch = new SinglePoolTicketMatch(4);
         when(prizeStructure.lookup(ticketMatch)).thenReturn(Optional.of(prize));
 
-        SpringLottoEntryResolution unit = new SpringLottoEntryResolution(prizeStructure, new SpringLottoTicketMatcher());
+        SpringLottoTicketResolution unit = new SpringLottoTicketResolution(new SpringLottoTicketMatcher(), prizeStructure);
 
         assertThat(unit.getResult(entry), equalTo(new SpringLottoWin(prize, ticketMatch)));
     }

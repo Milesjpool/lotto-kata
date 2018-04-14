@@ -1,6 +1,7 @@
 package calculation.lotteries.springlotto;
 
 import calculation.lotteries.Prize;
+import calculation.lotteries.TicketResolution;
 import calculation.lotteries.results.LotteryResult;
 import calculation.lotteries.results.LotteryResults;
 import calculation.lotteries.tickets.LotteryTicket;
@@ -9,17 +10,18 @@ import calculation.lotteries.tickets.TicketMatcher;
 
 import java.util.Optional;
 
-public class SpringLottoEntryResolution {
+public class SpringLottoTicketResolution implements TicketResolution {
 
-    private final PrizeStructure prizeStructure;
     private final TicketMatcher ticketMatcher;
+    private final PrizeStructure prizeStructure;
 
-    public SpringLottoEntryResolution(PrizeStructure prizeStructure, TicketMatcher ticketMatcher) {
+    public SpringLottoTicketResolution(TicketMatcher ticketMatcher, PrizeStructure prizeStructure) {
         this.prizeStructure = prizeStructure;
         this.ticketMatcher = ticketMatcher;
     }
 
-    LotteryResult getResult(LotteryTicket ticket) {
+    @Override
+    public LotteryResult getResult(LotteryTicket ticket) {
         TicketMatch ticketMatch = ticketMatcher.getMatch(ticket);
 
         Optional<Prize> prize = prizeStructure.lookup(ticketMatch);

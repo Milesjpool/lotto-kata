@@ -1,7 +1,6 @@
 package calculation.lotteries.springlotto;
 
 import calculation.lotteries.tickets.LotteryTicket;
-import calculation.lotteries.tickets.SinglePoolTicketMatch;
 import calculation.lotteries.tickets.TicketMatch;
 import calculation.lotteries.tickets.TicketMatcher;
 

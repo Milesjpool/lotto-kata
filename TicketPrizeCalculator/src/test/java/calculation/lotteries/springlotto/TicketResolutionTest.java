@@ -1,9 +1,11 @@
 package calculation.lotteries.springlotto;
 
-import calculation.lotteries.Prize;
+import calculation.lotteries.prizes.Prize;
+import calculation.lotteries.prizes.PrizeStructure;
+import calculation.lotteries.tickets.TicketResolution;
 import calculation.lotteries.results.LotteryResults;
+import calculation.lotteries.results.LotteryWin;
 import calculation.lotteries.tickets.LotteryTicket;
-import calculation.lotteries.tickets.SinglePoolTicketMatch;
 import calculation.lotteries.tickets.TicketMatch;
 import org.junit.Test;
 
@@ -14,7 +16,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SpringLottoTicketResolutionTest {
+public class TicketResolutionTest {
 
     private final PrizeStructure prizeStructure = mock(PrizeStructure.class);
     private final LotteryTicket entry = mock(LotteryTicket.class);
@@ -26,7 +28,7 @@ public class SpringLottoTicketResolutionTest {
         when(entry.getTicketNumbers()).thenReturn(new int[]{2,3});
 
         when(prizeStructure.lookup(new SinglePoolTicketMatch())).thenReturn(Optional.empty());
-        SpringLottoTicketResolution unit = new SpringLottoTicketResolution(new SpringLottoTicketMatcher(), prizeStructure);
+        TicketResolution unit = new TicketResolution(new SpringLottoTicketMatcher(), prizeStructure);
 
 
         assertThat(unit.getResult(entry), equalTo(LotteryResults.unsuccessfulTicket));
@@ -40,9 +42,9 @@ public class SpringLottoTicketResolutionTest {
         TicketMatch ticketMatch = new SinglePoolTicketMatch(3);
         when(prizeStructure.lookup(ticketMatch)).thenReturn(Optional.of(prize));
 
-        SpringLottoTicketResolution unit = new SpringLottoTicketResolution(new SpringLottoTicketMatcher(), prizeStructure);
+        TicketResolution unit = new TicketResolution(new SpringLottoTicketMatcher(), prizeStructure);
 
-        assertThat(unit.getResult(entry), equalTo(new SpringLottoWin(prize, ticketMatch)));
+        assertThat(unit.getResult(entry), equalTo(new LotteryWin(prize, ticketMatch)));
     }
 
     @Test
@@ -53,8 +55,8 @@ public class SpringLottoTicketResolutionTest {
         TicketMatch ticketMatch = new SinglePoolTicketMatch(4);
         when(prizeStructure.lookup(ticketMatch)).thenReturn(Optional.of(prize));
 
-        SpringLottoTicketResolution unit = new SpringLottoTicketResolution(new SpringLottoTicketMatcher(), prizeStructure);
+        TicketResolution unit = new TicketResolution(new SpringLottoTicketMatcher(), prizeStructure);
 
-        assertThat(unit.getResult(entry), equalTo(new SpringLottoWin(prize, ticketMatch)));
+        assertThat(unit.getResult(entry), equalTo(new LotteryWin(prize, ticketMatch)));
     }
 }

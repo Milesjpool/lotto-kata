@@ -1,5 +1,7 @@
 package calculation.lotteries.springlotto;
 
+import calculation.lotteries.tickets.TicketResolution;
+import calculation.lotteries.StandardLottery;
 import calculation.lotteries.results.LotteryResult;
 import calculation.lotteries.results.LotteryResults;
 import calculation.lotteries.tickets.LotteryTicket;
@@ -19,8 +21,8 @@ public class StandardLotteryTest {
     private int[] ticketNums = new int[]{7,4,20,35,1,12};
     private final LotteryTicket ticket = mock(LotteryTicket.class);
     private final NumberSetValidation numberSetValidation = mock(NumberSetValidation.class);
-    private final SpringLottoTicketResolution springLottoTicketResolution = mock(SpringLottoTicketResolution.class);
-    private final StandardLottery unit = new StandardLottery(numberSetValidation, springLottoTicketResolution);
+    private final TicketResolution ticketResolution = mock(TicketResolution.class);
+    private final StandardLottery unit = new StandardLottery(numberSetValidation, ticketResolution);
 
     @Before
     public void Setup() {
@@ -50,7 +52,7 @@ public class StandardLotteryTest {
     public void itReturnsAResult_whenATicketIsValid(){
         when(numberSetValidation.isValid(any())).thenReturn(true);
         LotteryResult result = mock(LotteryResult.class);
-        when(springLottoTicketResolution.getResult(ticket)).thenReturn(result);
+        when(ticketResolution.getResult(ticket)).thenReturn(result);
 
         assertThat(unit.evaluateTicket(ticket), equalTo(result));
     }

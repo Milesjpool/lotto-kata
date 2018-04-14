@@ -1,5 +1,6 @@
 package calculation.lotteries.tickets;
 
+import calculation.lotteries.springlotto.SinglePoolTicketMatch;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -17,6 +18,23 @@ public class SinglePoolTicketMatchTest {
         assertThat(unit.toString(), equalTo("the numbers 5, 10 from pool 1"));
     }
 
+    @Test
+    public void itOutputsPoolIdAsString(){
+        int poolId = 5;
+        SinglePoolTicketMatch unit = new SinglePoolTicketMatch(poolId, 1);
+        unit.addMatch(5);
+        unit.addMatch(10);
+
+        assertThat(unit.toString(), equalTo("the numbers 5, 10 from pool " + poolId));
+    }
+
+    @Test
+    public void itOutputsSingularMatchAsString(){
+        SinglePoolTicketMatch unit = new SinglePoolTicketMatch();
+        unit.addMatch(5);
+
+        assertThat(unit.toString(), equalTo("the number 5 from pool 1"));
+    }
 
     @Test
     public void itOutputsNoMatchesAsString(){

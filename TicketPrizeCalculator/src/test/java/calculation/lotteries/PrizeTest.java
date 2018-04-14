@@ -1,5 +1,6 @@
 package calculation.lotteries;
 
+import calculation.lotteries.prizes.Prize;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.not;

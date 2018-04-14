@@ -1,10 +1,9 @@
-package calculation.lotteries.springlotto;
+package calculation.lotteries;
 
-import calculation.lotteries.Lottery;
-import calculation.lotteries.TicketResolution;
 import calculation.lotteries.results.LotteryResult;
 import calculation.lotteries.results.LotteryResults;
 import calculation.lotteries.tickets.LotteryTicket;
+import calculation.lotteries.tickets.TicketResolution;
 import calculation.lotteries.tickets.validation.NumberSetValidation;
 
 public class StandardLottery implements Lottery {

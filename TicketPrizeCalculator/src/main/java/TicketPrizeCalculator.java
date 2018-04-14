@@ -1,11 +1,14 @@
 import calculation.LotteryNumberParser;
 import calculation.LotteryTicketParser;
 import calculation.TicketPrizeCalculation;
-import calculation.lotteries.LotteryRegistry;
-import calculation.lotteries.NullLottery;
-import calculation.lotteries.Prize;
+import calculation.lotteries.*;
+import calculation.lotteries.javamillions.JavaMillionsTicketMatcher;
+import calculation.lotteries.javamillions.TwoPoolTicketMatch;
+import calculation.lotteries.prizes.Prize;
+import calculation.lotteries.prizes.PrizeStructure;
 import calculation.lotteries.springlotto.*;
-import calculation.lotteries.tickets.SinglePoolTicketMatch;
+import calculation.lotteries.springlotto.SinglePoolTicketMatch;
+import calculation.lotteries.tickets.TicketResolution;
 import calculation.lotteries.tickets.validation.*;
 import io.Printable;
 import io.metadata.ApplicationHeader;
@@ -16,15 +19,16 @@ public class TicketPrizeCalculator {
 
     private static final LotteryTicketParser argumentParser = new LotteryTicketParser(new LotteryNumberParser());
     private static final LotteryRegistry lotteryRegistry = new LotteryRegistry(new NullLottery());
-    private static final PrizeStructure springLottoPrizeStructure = new PrizeStructure();
 
+    private static final PrizeStructure springLottoPrizeStructure = new PrizeStructure();
     private static final StandardLottery springLotto = new StandardLottery(
             new ChainedNumberSetValidation(
                     new NumberSetLengthValidation(6),
                     new NumberRangeValidation(1, 36),
                     new NoDuplicateNumbersValidation()
-            ), new SpringLottoTicketResolution(new SpringLottoTicketMatcher(), springLottoPrizeStructure));
+            ), new TicketResolution(new SpringLottoTicketMatcher(), springLottoPrizeStructure));
 
+    private static final PrizeStructure javaMillionsPrizeStructure = new PrizeStructure();
     private static final StandardLottery javaMillions = new StandardLottery(
             new PoolingValidator(
                     5, new ChainedNumberSetValidation(
@@ -32,7 +36,7 @@ public class TicketPrizeCalculator {
                                     new NoDuplicateNumbersValidation()
                                  ),
                     1, new NumberRangeValidation(1, 9)
-            ), null);
+            ), new TicketResolution(new JavaMillionsTicketMatcher(), javaMillionsPrizeStructure));
 
     static {
         springLottoPrizeStructure.addPrize(new SinglePoolTicketMatch(6), new Prize(1, "500,000"));
@@ -42,6 +46,15 @@ public class TicketPrizeCalculator {
         springLottoPrizeStructure.addPrize(new SinglePoolTicketMatch(2), new Prize(5, "12"));
         springLottoPrizeStructure.addPrize(new SinglePoolTicketMatch(1), new Prize(6, "3"));
         lotteryRegistry.registerLottery("SpringLotto", springLotto);
+
+        javaMillionsPrizeStructure.addPrize(new TwoPoolTicketMatch(5,1), new Prize(1,"10,000,000"));
+        javaMillionsPrizeStructure.addPrize(new TwoPoolTicketMatch(5,0), new Prize(2,"100,000"));
+        javaMillionsPrizeStructure.addPrize(new TwoPoolTicketMatch(4,1), new Prize(3,"10,000"));
+        javaMillionsPrizeStructure.addPrize(new TwoPoolTicketMatch(4,0), new Prize(4,"500"));
+        javaMillionsPrizeStructure.addPrize(new TwoPoolTicketMatch(3,1), new Prize(5,"100"));
+        javaMillionsPrizeStructure.addPrize(new TwoPoolTicketMatch(3,0), new Prize(6,"30"));
+        javaMillionsPrizeStructure.addPrize(new TwoPoolTicketMatch(2,1), new Prize(7,"5"));
+        javaMillionsPrizeStructure.addPrize(new TwoPoolTicketMatch(2,0), new Prize(8,"2"));
         lotteryRegistry.registerLottery("JavaMillions", javaMillions);
     }
 

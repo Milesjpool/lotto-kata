@@ -1,6 +1,7 @@
 package calculation.lotteries.springlotto;
 
-import calculation.lotteries.Prize;
+import calculation.lotteries.prizes.Prize;
+import calculation.lotteries.prizes.PrizeStructure;
 import calculation.lotteries.tickets.TicketMatch;
 import org.junit.Test;
 

@@ -1,17 +1,16 @@
-package calculation.lotteries.springlotto;
+package calculation.lotteries.results;
 
-import calculation.lotteries.Prize;
-import calculation.lotteries.results.LotteryResult;
+import calculation.lotteries.prizes.Prize;
 import calculation.lotteries.tickets.TicketMatch;
 
 import java.io.PrintStream;
 import java.util.Objects;
 
-public class SpringLottoWin implements LotteryResult {
+public class LotteryWin implements LotteryResult {
     private final Prize prize;
     private final TicketMatch ticketMatch;
 
-    SpringLottoWin(Prize prize, TicketMatch ticketMatch) {
+    public LotteryWin(Prize prize, TicketMatch ticketMatch) {
         this.prize = prize;
         this.ticketMatch = ticketMatch;
     }
@@ -31,9 +30,9 @@ public class SpringLottoWin implements LotteryResult {
     public boolean equals(Object obj) {
         if (obj == null)
                 return false;
-        if (!(obj instanceof SpringLottoWin))
+        if (!(obj instanceof LotteryWin))
                 return false;
-        SpringLottoWin o = (SpringLottoWin) obj;
+        LotteryWin o = (LotteryWin) obj;
         return o.prize.equals(this.prize)
                 && o.ticketMatch.equals(this.ticketMatch);
     }

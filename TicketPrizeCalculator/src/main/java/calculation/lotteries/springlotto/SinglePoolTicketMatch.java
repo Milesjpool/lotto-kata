@@ -1,5 +1,6 @@
-package calculation.lotteries.tickets;
+package calculation.lotteries.springlotto;
 
+import calculation.lotteries.tickets.TicketMatch;
 import util.StringUtils;
 
 import java.util.ArrayList;
@@ -7,15 +8,21 @@ import java.util.List;
 import java.util.Objects;
 
 public class SinglePoolTicketMatch implements TicketMatch {
+    private int poolId;
     private int matches;
     private final List<String> winningNumbers = new ArrayList<>();
 
     public SinglePoolTicketMatch() {
-        this(0);
+        this(1, 0);
     }
 
     public SinglePoolTicketMatch(int matches) {
+        this(1, matches);
+    }
+
+    public SinglePoolTicketMatch(int poolId, int matches) {
         this.matches = matches;
+        this.poolId = poolId;
     }
 
     public void addMatch(int winningNumber) {
@@ -27,7 +34,8 @@ public class SinglePoolTicketMatch implements TicketMatch {
     public String toString() {
         if (winningNumbers.isEmpty())
             return "no numbers from pool 1";
-        return "the numbers " + StringUtils.concat(winningNumbers, ", ") + " from pool 1";
+        String plural = (winningNumbers.size() > 1) ? "s" : "";
+        return "the number" + plural + " " + StringUtils.concat(winningNumbers, ", ") + " from pool " + poolId;
     }
 
     @Override

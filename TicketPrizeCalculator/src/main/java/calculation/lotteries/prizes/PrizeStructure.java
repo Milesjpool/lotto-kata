@@ -1,6 +1,5 @@
-package calculation.lotteries.springlotto;
+package calculation.lotteries.prizes;
 
-import calculation.lotteries.Prize;
 import calculation.lotteries.tickets.TicketMatch;
 
 import java.util.HashMap;
@@ -10,7 +9,7 @@ import java.util.Optional;
 public class PrizeStructure {
     private Map<TicketMatch, Prize> prizes = new HashMap<>();
 
-    Optional<Prize> lookup(TicketMatch ticketMatch) {
+    public Optional<Prize> lookup(TicketMatch ticketMatch) {
         return Optional.ofNullable(prizes.get(ticketMatch));
     }
 

@@ -8,21 +8,17 @@ import java.util.Objects;
 public class TwoPoolTicketMatch implements TicketMatch {
     private SinglePoolTicketMatch[] poolMatches = new SinglePoolTicketMatch[2];
 
-    TwoPoolTicketMatch() {
-        this(0,0);
-    }
-
     public TwoPoolTicketMatch(int pool1Matches, int pool2Matches) {
-        this.poolMatches[0] = new SinglePoolTicketMatch(1, pool1Matches);
-        this.poolMatches[1] = new SinglePoolTicketMatch(2, pool2Matches);
+        this(new SinglePoolTicketMatch(1, pool1Matches), new SinglePoolTicketMatch(2, pool2Matches));
     }
 
-    public void addMatch(int pool, int matchedNumber) {
-        poolMatches[pool-1].addMatch(matchedNumber);
+    TwoPoolTicketMatch(SinglePoolTicketMatch pool1matches, SinglePoolTicketMatch pool2matches) {
+        this.poolMatches[0] = pool1matches;
+        this.poolMatches[1] = pool2matches;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return poolMatches[0].toString() + " and " + poolMatches[1].toString();
     }
 

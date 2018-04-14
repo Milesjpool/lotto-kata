@@ -1,5 +1,6 @@
 package calculation.lotteries.javamillions;
 
+import calculation.lotteries.springlotto.SinglePoolTicketMatch;
 import calculation.lotteries.tickets.LotteryTicket;
 import calculation.lotteries.tickets.TicketMatch;
 import calculation.lotteries.tickets.TicketMatcher;
@@ -9,24 +10,23 @@ public class JavaMillionsTicketMatcher implements TicketMatcher {
     private static final int POOL_2_SIZE = 1;
     @Override
     public TicketMatch getMatch(LotteryTicket entry) {
-        TwoPoolTicketMatch ticketMatch = new TwoPoolTicketMatch();
         int[] ticketNumbers = entry.getTicketNumbers();
         int[] winningNumbers = entry.getWinningNumbers();
 
-        for (int i = 0; i < POOL_1_SIZE; i++) {
-            for (int j = 0; j < POOL_1_SIZE; j++) {
+        SinglePoolTicketMatch pool1matches = getMatches(1, winningNumbers, ticketNumbers, 0, POOL_1_SIZE);
+        SinglePoolTicketMatch pool2matches = getMatches(2, winningNumbers, ticketNumbers, POOL_1_SIZE, POOL_2_SIZE);
+        return new TwoPoolTicketMatch(pool1matches, pool2matches);
+    }
+
+    private SinglePoolTicketMatch getMatches(int poolId, int[] winningNumbers, int[] ticketNumbers, int start, int count) {
+        SinglePoolTicketMatch ticketMatch = new SinglePoolTicketMatch(poolId, 0);
+
+        for (int i = start; i < start+count; i++) {
+            for (int j = start; j < start+count; j++) {
                 if (winningNumbers[i] == ticketNumbers[j])
-                    ticketMatch.addMatch(1, winningNumbers[i]);
+                    ticketMatch.addMatch(winningNumbers[i]);
             }
         }
-
-        for (int i = POOL_1_SIZE; i < POOL_1_SIZE+POOL_2_SIZE; i++) {
-            for (int j = POOL_1_SIZE; j < POOL_1_SIZE+POOL_2_SIZE; j++) {
-                if (winningNumbers[i] == ticketNumbers[j])
-                    ticketMatch.addMatch(2, winningNumbers[i]);
-            }
-        }
-
         return ticketMatch;
     }
 }

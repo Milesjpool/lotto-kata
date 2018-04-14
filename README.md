@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Milesjpool/lotto-kata.svg?branch=master)](https://travis-ci.org/Milesjpool/lotto-kata)
+
 # lotto-kata
 A command-line lottery prize finder
 

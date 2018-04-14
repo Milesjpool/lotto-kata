@@ -1,6 +1,6 @@
 package calculation.lotteries.tickets;
 
-import com.sun.deploy.util.StringUtils;
+import util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +27,7 @@ public class SinglePoolTicketMatch implements TicketMatch {
     public String toString() {
         if (winningNumbers.isEmpty())
             return "no numbers from pool 1";
-        String numbers = StringUtils.join(winningNumbers, ", ");
-        return "the numbers " + numbers + " from pool 1";
+        return "the numbers " + StringUtils.concat(winningNumbers, ", ") + " from pool 1";
     }
 
     @Override
@@ -45,4 +44,5 @@ public class SinglePoolTicketMatch implements TicketMatch {
         SinglePoolTicketMatch o = (SinglePoolTicketMatch) obj;
         return o.matches == this.matches;
     }
+
 }

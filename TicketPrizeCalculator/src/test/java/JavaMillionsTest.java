@@ -34,4 +34,37 @@ public class JavaMillionsTest {
 
         assertThat(outputStream.toString(), containsString("This ticket did not win a prize."));
     }
+
+    @Test
+    public void itNotifies_whenANumberIsDuplicatedInPool1(){
+        String winningNumbers = "2,2,3,4,5,1";
+        String ticketNumbers = "6,7,8,9,10,2";
+        String[] args = new String[]{"JavaMillions", winningNumbers, ticketNumbers};
+
+        TicketPrizeCalculator.main(args);
+
+        assertThat(outputStream.toString(), containsString("This ticket is malformed."));
+    }
+
+    @Test
+    public void itNotifies_whenATicketIsOutOfRangeInPool1(){
+        String winningNumbers = "1,2,3,4,50,1";
+        String ticketNumbers = "6,7,8,9,10,2";
+        String[] args = new String[]{"JavaMillions", winningNumbers, ticketNumbers};
+
+        TicketPrizeCalculator.main(args);
+
+        assertThat(outputStream.toString(), containsString("This ticket is malformed."));
+    }
+
+    @Test
+    public void itNotifies_whenATicketIsOutOfRangeInPool2(){
+        String winningNumbers = "1,2,3,4,5,1";
+        String ticketNumbers = "6,7,8,9,10,10";
+        String[] args = new String[]{"JavaMillions", winningNumbers, ticketNumbers};
+
+        TicketPrizeCalculator.main(args);
+
+        assertThat(outputStream.toString(), containsString("This ticket is malformed."));
+    }
 }

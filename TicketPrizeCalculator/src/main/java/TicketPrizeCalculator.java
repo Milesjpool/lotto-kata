@@ -26,7 +26,13 @@ public class TicketPrizeCalculator {
             ), new SpringLottoTicketResolution(new SpringLottoTicketMatcher(), springLottoPrizeStructure));
 
     private static final StandardLottery javaMillions = new StandardLottery(
-            new PoolingValidator(5, null, 1, null), null);
+            new PoolingValidator(
+                    5, new ChainedNumberSetValidation(
+                                    new NumberRangeValidation(1, 49),
+                                    new NoDuplicateNumbersValidation()
+                                 ),
+                    1, new NumberRangeValidation(1, 9)
+            ), null);
 
     static {
         springLottoPrizeStructure.addPrize(new SinglePoolTicketMatch(6), new Prize(1, "500,000"));
@@ -39,7 +45,7 @@ public class TicketPrizeCalculator {
         lotteryRegistry.registerLottery("JavaMillions", javaMillions);
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         APPLICATION_HEADER.print(System.out);
 
         final TicketPrizeCalculation ticketPrizeCalculation = new TicketPrizeCalculation(argumentParser, lotteryRegistry);

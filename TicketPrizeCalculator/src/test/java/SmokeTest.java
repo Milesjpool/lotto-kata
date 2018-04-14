@@ -1,6 +1,5 @@
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -56,7 +55,6 @@ public class SmokeTest {
     }
 
     @Test
-    @Ignore("Work in progress")
     public void itNotifiesWhenATicketDoesNotWinSpringLotto(){
         String winningNumbers = "6,20,4,30,2,10";
         String ticketNumbers = "7,4,20,35,1,12";

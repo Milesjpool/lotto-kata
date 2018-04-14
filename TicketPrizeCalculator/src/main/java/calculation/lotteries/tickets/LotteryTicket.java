@@ -1,9 +1,11 @@
 package calculation.lotteries.tickets;
 
+import calculation.lotteries.LotteryEntry;
+
 import java.util.Arrays;
 import java.util.Objects;
 
-public class LotteryTicket {
+public class LotteryTicket implements LotteryEntry {
     private final String lotteryName;
     private int[] winningNumbers;
     private int[] ticketNumbers;

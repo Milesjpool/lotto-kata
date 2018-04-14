@@ -12,18 +12,22 @@ import java.util.Optional;
 public class SpringLotto implements Lottery {
 
     private final NumberSetValidation numberSetValidation;
-    private final SpringLottoPrizeResolution springLottoPrizeResolution;
+    private final SpringLottoEntryResolution springLottoEntryResolution;
 
-    public SpringLotto(NumberSetValidation poolValidation, SpringLottoPrizeResolution springLottoPrizeResolution) {
+    public SpringLotto(NumberSetValidation poolValidation, SpringLottoEntryResolution springLottoEntryResolution) {
         this.numberSetValidation = poolValidation;
-        this.springLottoPrizeResolution = springLottoPrizeResolution;
+        this.springLottoEntryResolution = springLottoEntryResolution;
     }
 
     public LotteryResult evaluateTicket(LotteryTicket ticket) {
         if (!isValidTicket(ticket))
             return LotteryResults.malformedTicket;
 
-        Optional<Prize> prize = springLottoPrizeResolution.resolve(ticket.getWinningNumbers(), ticket.getTicketNumbers());
+        return getLotteryResult(ticket);
+    }
+
+    private LotteryResult getLotteryResult(LotteryTicket ticket) {
+        Optional<Prize> prize = springLottoEntryResolution.resolve(ticket);
 
         Optional<LotteryResult> winResult = prize.map(SpringLottoWin::new);
         return winResult.orElse(LotteryResults.unsuccessfulTicket);

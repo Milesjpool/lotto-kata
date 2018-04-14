@@ -1,7 +1,5 @@
-package calculation.lotteries.tickets.validations;
+package calculation.lotteries.tickets.validation;
 
-import calculation.lotteries.tickets.validation.ChainedNumberSetValidation;
-import calculation.lotteries.tickets.validation.NumberSetValidation;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;

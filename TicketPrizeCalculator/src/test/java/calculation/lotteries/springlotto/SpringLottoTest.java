@@ -20,8 +20,8 @@ public class SpringLottoTest {
     private int[] ticketNums = new int[]{7,4,20,35,1,12};
     private final LotteryTicket ticket = mock(LotteryTicket.class);
     private final NumberSetValidation numberSetValidation = mock(NumberSetValidation.class);
-    private final SpringLottoPrizeResolution springLottoPrizeResolution = mock(SpringLottoPrizeResolution.class);
-    private final SpringLotto unit = new SpringLotto(numberSetValidation, springLottoPrizeResolution);
+    private final SpringLottoEntryResolution springLottoEntryResolution = mock(SpringLottoEntryResolution.class);
+    private final SpringLotto unit = new SpringLotto(numberSetValidation, springLottoEntryResolution);
 
     @Before
     public void Setup() {
@@ -50,7 +50,7 @@ public class SpringLottoTest {
     @Test
     public void itReturnsAResult_whenAPrizeIsNotAwarded(){
         when(numberSetValidation.isValid(any())).thenReturn(true);
-        when(springLottoPrizeResolution.resolve(winningNums, ticketNums)).thenReturn(Optional.empty());
+        when(springLottoEntryResolution.resolve(ticket)).thenReturn(Optional.empty());
 
         assertThat(unit.evaluateTicket(ticket), equalTo(LotteryResults.unsuccessfulTicket));
     }

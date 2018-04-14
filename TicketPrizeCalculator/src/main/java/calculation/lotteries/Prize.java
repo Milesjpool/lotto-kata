@@ -13,7 +13,7 @@ public class Prize {
 
     @Override
     public String toString() {
-        return "a prize of class " + prizeClass + " and amount £" + winnings + ".";
+        return "a prize of class " + prizeClass + " and amount £" + winnings;
     }
 
 

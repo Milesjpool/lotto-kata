@@ -53,27 +53,6 @@ public class SmokeTest {
 
         assertThat(outputStream.toString(), containsString("This is not a recognised ticket."));
     }
-
-    @Test
-    public void itNotifiesWhenATicketDoesNotWinSpringLotto(){
-        String winningNumbers = "6,20,4,30,2,10";
-        String ticketNumbers = "7,4,20,35,1,12";
-        String[] args = new String[]{"SpringLotto", winningNumbers, ticketNumbers};
-
-        TicketPrizeCalculator.main(args);
-
-        assertThat(outputStream.toString(), containsString("This ticket did not win a prize."));
-    }
-
-    @Test
-    public void itNotifiesWhenATicketWinsSpringLotto(){
-        String winningNumbers = "7,20,4,35,1,12";
-        String ticketNumbers = "7,4,20,35,1,12";
-        String[] args = new String[]{"SpringLotto", winningNumbers, ticketNumbers};
-
-        TicketPrizeCalculator.main(args);
-
-        assertThat(outputStream.toString(), containsString("This ticket won a prize of class 3 and amount £300."));
-        assertThat(outputStream.toString(), containsString("Matched the numbers 7, 35, 1, 12 from pool 1."));
-    }
 }
+
+

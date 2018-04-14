@@ -2,27 +2,29 @@ package calculation.lotteries.springlotto;
 
 import calculation.lotteries.Prize;
 import calculation.lotteries.results.LotteryResult;
+import calculation.lotteries.tickets.TicketMatch;
 
 import java.io.PrintStream;
 import java.util.Objects;
 
 public class SpringLottoWin implements LotteryResult {
     private final Prize prize;
+    private final TicketMatch ticketMatch;
 
-    SpringLottoWin(Prize prize) {
+    SpringLottoWin(Prize prize, TicketMatch ticketMatch) {
         this.prize = prize;
+        this.ticketMatch = ticketMatch;
     }
-
 
     @Override
     public void print(PrintStream printStream) {
-        printStream.println("This ticket won " + prize);
-        printStream.println("Matched the numbers 7, 35, 1, 12 from pool 1.");
+        printStream.println("This ticket won " + prize + ".");
+        printStream.println("Matched " + ticketMatch + ".");
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(prize);
+        return Objects.hash(prize, ticketMatch);
     }
 
     @Override
@@ -32,6 +34,7 @@ public class SpringLottoWin implements LotteryResult {
         if (!(obj instanceof SpringLottoWin))
                 return false;
         SpringLottoWin o = (SpringLottoWin) obj;
-        return o.prize == this.prize;
+        return o.prize.equals(this.prize)
+                && o.ticketMatch.equals(this.ticketMatch);
     }
 }

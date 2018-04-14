@@ -1,9 +1,14 @@
 package calculation.lotteries.tickets;
 
+import com.sun.deploy.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class SinglePoolTicketMatch implements TicketMatch {
     private int matches;
+    private final List<String> winningNumbers = new ArrayList<>();
 
     public SinglePoolTicketMatch() {
         this(0);
@@ -13,8 +18,17 @@ public class SinglePoolTicketMatch implements TicketMatch {
         this.matches = matches;
     }
 
-    public void addMatch() {
+    public void addMatch(int winningNumber) {
+        winningNumbers.add(String.valueOf(winningNumber));
         matches++;
+    }
+
+    @Override
+    public String toString() {
+        if (winningNumbers.isEmpty())
+            return "no numbers from pool 1";
+        String numbers = StringUtils.join(winningNumbers, ", ");
+        return "the numbers " + numbers + " from pool 1";
     }
 
     @Override

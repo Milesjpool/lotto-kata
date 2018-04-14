@@ -1,12 +1,11 @@
 package calculation.lotteries.springlotto;
 
+import calculation.lotteries.results.LotteryResult;
+import calculation.lotteries.results.LotteryResults;
 import calculation.lotteries.tickets.LotteryTicket;
 import calculation.lotteries.tickets.validation.NumberSetValidation;
-import calculation.lotteries.results.LotteryResults;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -48,10 +47,11 @@ public class SpringLottoTest {
     }
 
     @Test
-    public void itReturnsAResult_whenAPrizeIsNotAwarded(){
+    public void itReturnsAResult_whenATicketIsValid(){
         when(numberSetValidation.isValid(any())).thenReturn(true);
-        when(springLottoEntryResolution.resolve(ticket)).thenReturn(Optional.empty());
+        LotteryResult result = mock(LotteryResult.class);
+        when(springLottoEntryResolution.getResult(ticket)).thenReturn(result);
 
-        assertThat(unit.evaluateTicket(ticket), equalTo(LotteryResults.unsuccessfulTicket));
+        assertThat(unit.evaluateTicket(ticket), equalTo(result));
     }
 }

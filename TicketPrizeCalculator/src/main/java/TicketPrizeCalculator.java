@@ -7,6 +7,7 @@ import calculation.lotteries.Prize;
 import calculation.lotteries.springlotto.PrizeStructure;
 import calculation.lotteries.springlotto.SpringLotto;
 import calculation.lotteries.springlotto.SpringLottoEntryResolution;
+import calculation.lotteries.springlotto.SpringLottoTicketMatcher;
 import calculation.lotteries.tickets.SinglePoolTicketMatch;
 import calculation.lotteries.tickets.validation.ChainedNumberSetValidation;
 import calculation.lotteries.tickets.validation.NoDuplicateNumbersValidation;
@@ -28,10 +29,15 @@ public class TicketPrizeCalculator {
                     new NumberSetLengthValidation(6),
                     new NumberRangeValidation(1, 36),
                     new NoDuplicateNumbersValidation()
-            ), new SpringLottoEntryResolution(springLottoPrizeStructure));
+            ), new SpringLottoEntryResolution(springLottoPrizeStructure, new SpringLottoTicketMatcher()));
 
     static {
+        springLottoPrizeStructure.addPrize(new SinglePoolTicketMatch(6), new Prize(1, "500,000"));
+        springLottoPrizeStructure.addPrize(new SinglePoolTicketMatch(5), new Prize(2, "2,000"));
         springLottoPrizeStructure.addPrize(new SinglePoolTicketMatch(4), new Prize(3, "300"));
+        springLottoPrizeStructure.addPrize(new SinglePoolTicketMatch(3), new Prize(4, "50"));
+        springLottoPrizeStructure.addPrize(new SinglePoolTicketMatch(2), new Prize(5, "12"));
+        springLottoPrizeStructure.addPrize(new SinglePoolTicketMatch(1), new Prize(6, "3"));
         lotteryRegistry.registerLottery("SpringLotto", springLotto);
     }
 

@@ -9,6 +9,23 @@ import static org.junit.Assert.assertThat;
 public class SinglePoolTicketMatchTest {
 
     @Test
+    public void itOutputsMatchesAsString(){
+        SinglePoolTicketMatch unit = new SinglePoolTicketMatch();
+        unit.addMatch(5);
+        unit.addMatch(10);
+
+        assertThat(unit.toString(), equalTo("the numbers 5, 10 from pool 1"));
+    }
+
+
+    @Test
+    public void itOutputsNoMatchesAsString(){
+        SinglePoolTicketMatch unit = new SinglePoolTicketMatch();
+
+        assertThat(unit.toString(), equalTo("no numbers from pool 1"));
+    }
+
+    @Test
     public void itIsEqualToSimilarInstance(){
         TicketMatch unit = new SinglePoolTicketMatch(3);
         TicketMatch other = new SinglePoolTicketMatch(3);

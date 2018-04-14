@@ -2,12 +2,9 @@ package calculation.lotteries.springlotto;
 
 import calculation.lotteries.Lottery;
 import calculation.lotteries.tickets.validation.NumberSetValidation;
-import calculation.lotteries.Prize;
 import calculation.lotteries.results.LotteryResult;
 import calculation.lotteries.tickets.LotteryTicket;
 import calculation.lotteries.results.LotteryResults;
-
-import java.util.Optional;
 
 public class SpringLotto implements Lottery {
 
@@ -23,14 +20,7 @@ public class SpringLotto implements Lottery {
         if (!isValidTicket(ticket))
             return LotteryResults.malformedTicket;
 
-        return getLotteryResult(ticket);
-    }
-
-    private LotteryResult getLotteryResult(LotteryTicket ticket) {
-        Optional<Prize> prize = springLottoEntryResolution.resolve(ticket);
-
-        Optional<LotteryResult> winResult = prize.map(SpringLottoWin::new);
-        return winResult.orElse(LotteryResults.unsuccessfulTicket);
+        return springLottoEntryResolution.getResult(ticket);
     }
 
     //TODO: consider separating malformed ticket and malformed draw.

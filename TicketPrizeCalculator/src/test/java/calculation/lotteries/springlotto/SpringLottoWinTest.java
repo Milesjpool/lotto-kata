@@ -1,6 +1,8 @@
 package calculation.lotteries.springlotto;
 
 import calculation.lotteries.Prize;
+import calculation.lotteries.tickets.SinglePoolTicketMatch;
+import calculation.lotteries.tickets.TicketMatch;
 import io.Printable;
 import org.junit.Test;
 
@@ -14,15 +16,18 @@ import static org.mockito.Mockito.*;
 public class SpringLottoWinTest {
 
 
+    private final Prize prize = mock(Prize.class);
+    private final TicketMatch match = mock(TicketMatch.class);
+
     @Test
     public void itOutputsWinnings() {
 
-        int prizeClass = 3;
-        int winnings = 300;
-        String expectedMessage =
-                "This ticket won a prize of class " + prizeClass + " and amount £" + winnings + ".";
+        String prizeMessage = "prize message";
+        String expectedMessage = "This ticket won " + prizeMessage + ".";
 
-        Printable unit = new SpringLottoWin(new Prize(prizeClass, "300"));
+        when(prize.toString()).thenReturn(prizeMessage);
+
+        Printable unit = new SpringLottoWin(prize, match);
 
         PrintStream printStream = mock(PrintStream.class);
         unit.print(printStream);
@@ -33,10 +38,12 @@ public class SpringLottoWinTest {
     @Test
     public void itOutputsWinningNumbers() {
 
-        String expectedMessage =
-                "Matched the numbers 7, 35, 1, 12 from pool 1.";
+        String matchMessage = "prize message";
+        String expectedMessage = "Matched " + matchMessage + ".";
 
-        Printable unit = new SpringLottoWin(new Prize(3, "300"));
+        when(match.toString()).thenReturn(matchMessage);
+
+        Printable unit = new SpringLottoWin(prize, match);
 
         PrintStream printStream = mock(PrintStream.class);
         unit.print(printStream);
@@ -45,18 +52,25 @@ public class SpringLottoWinTest {
     }
 
     @Test
-    public void itIsNotEqualToDissimilarInstance(){
-        SpringLottoWin unit = new SpringLottoWin(new Prize(1, "300"));
-        SpringLottoWin other = new SpringLottoWin(new Prize(3, "300"));
+    public void itIsNotEqualToDissimilarPrize(){
+        SpringLottoWin unit = new SpringLottoWin(new Prize(1, "300"), match);
+        SpringLottoWin other = new SpringLottoWin(new Prize(3, "300"), match);
+
+        assertThat(unit, not(equalTo(other)));
+    }
+
+    @Test
+    public void itIsNotEqualToDissimilarMatch(){
+        SpringLottoWin unit = new SpringLottoWin(prize, new SinglePoolTicketMatch(1));
+        SpringLottoWin other = new SpringLottoWin(prize, new SinglePoolTicketMatch(3));
 
         assertThat(unit, not(equalTo(other)));
     }
 
     @Test
     public void itIsEqualToSimilarInstance(){
-        Prize prize = new Prize(1, "300");
-        SpringLottoWin unit = new SpringLottoWin(prize);
-        SpringLottoWin other = new SpringLottoWin(prize);
+        SpringLottoWin unit = new SpringLottoWin(prize, match);
+        SpringLottoWin other = new SpringLottoWin(prize, match);
 
         assertThat(unit, equalTo(other));
     }

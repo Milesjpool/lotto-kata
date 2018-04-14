@@ -11,7 +11,7 @@ public class PrizeTest {
     @Test
     public void itIsDescribedInToString(){
         Prize unit = new Prize(1, "300");
-        assertThat(unit.toString(), equalTo("a prize of class 1 and amount £300."));
+        assertThat(unit.toString(), equalTo("a prize of class 1 and amount £300"));
     }
 
     @Test
